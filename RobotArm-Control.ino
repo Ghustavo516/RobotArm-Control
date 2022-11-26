@@ -1,6 +1,7 @@
 
-#include <VarSpeedServo.h> 
+#include <VarSpeedServo.h> //Biblioteca para comandar os servos motores
 
+//Essas variaves são responsaveis por armazenar a posição zero maquina de cada eixo
 String readString;
 int posx = 90; 
 int posy = 90; 
@@ -41,6 +42,7 @@ VarSpeedServo SG90_ServoC;
 VarSpeedServo SG90_ServoB;
 
 void setup(){
+  //Inicializando os servos e referenciandos 
   MG995_ServoX.attach(EixoX_PWM);
   MG995_ServoY1.attach(EixoY1_PWM);
   MG995_ServoY2.attach(EixoY2_PWM);
@@ -49,11 +51,12 @@ void setup(){
   SG90_ServoC.attach(EixoC_PWM);
   SG90_ServoB.attach(EixoB_PWM);
 
-  Serial.begin(9600);
+  Serial.begin(9600);//Inicializando o monitor serial
   Serial.println("Digite help para ver os comandos");
   
 }
 void Help(){
+  //Função responsavel por demostrar ao usuario as possibilidades que pode fazer com os eixos
   Serial.println("Codigo de teste de movimentacao dos motores");
   Serial.println();
   Serial.println("no serial digite o angulo desejado junto ao eixo e pressione enter");
@@ -85,6 +88,7 @@ void Help(){
 
   
 void Base(int anguloX, int velocidadeBase){
+  //Função responsavel por comandar o eixo X correspondente a BASE
   MG995_ServoX.write(anguloX, velocidadeBase);
   Serial.println("eixo X em: ");
   Serial.println(anguloX);
@@ -101,6 +105,7 @@ void Braco(int anguloY, int velocidadeBraco){
 }
 
 void Antebraco(int angulo_anteBraco, int velocidade_anteBraco){
+  //Função responsavel por comandar o eixo Z correspondente ao ANTEBRAÇO
   MG995_ServoZ.write(angulo_anteBraco, velocidade_anteBraco); 
   Serial.println("eixo Z em: ");
   Serial.println(angulo_anteBraco);
@@ -108,17 +113,20 @@ void Antebraco(int angulo_anteBraco, int velocidade_anteBraco){
 }
 
 void Pulso(int angulo_pulso, int velocidade_pulso){
+  //Função responsavel por comandar o eixo W correspondente ao PULSO
   MG995_ServoW.write(angulo_pulso, velocidade_pulso); 
   Serial.println("eixo W em: ");
   Serial.println(angulo_pulso);
 }
 void torcaoPulso(int angulo_torcaoPulso, int velocidade_torcaoPulso){
+  //Função responsavel por comandar o eixo C correspondente a TORÇÃO DO PULSO
   SG90_ServoC.write(angulo_torcaoPulso, velocidade_torcaoPulso); 
   Serial.println("eixo C em: ");
   Serial.println(angulo_torcaoPulso);
 }
 
 void Garra(int angulo_garra, int velocidade_garra){
+  //Função responsavel por comandar o eixo B correspondente a GARRA
   SG90_ServoB.write(angulo_garra, velocidade_garra); 
   Serial.println("eixo B em: ");
   Serial.println(angulo_garra);
